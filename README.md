@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Getting Started
 All the given task assaigned to me has been completed.
-
+The architecture i have used is done through GetCLi
 For api integration i have done through http 
 
 To implement saving articles to a favorite list and displaying them on a separate screen, i had to make use of a local database. In this case, I used the sqflite package to store and retrieve articles.
