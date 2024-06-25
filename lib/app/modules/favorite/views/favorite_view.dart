@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../db_helper.dart';
 import '../controllers/favorite_controller.dart';
 
 class FavoriteView extends GetView<FavoriteController> {
@@ -10,14 +11,39 @@ class FavoriteView extends GetView<FavoriteController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FavoriteView'),
-        centerTitle: true,
+        title: Text("Favorite Articles"),
       ),
-      body: const Center(
-        child: Text(
-          'FavoriteView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: DBHelper().getFavorites(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.data!.isEmpty) {
+            return Center(child: Text("No favorite articles yet."));
+          }
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              var article = snapshot.data![index];
+              return Card(
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                child: ListTile(
+                  title: Text(article['title']),
+                  subtitle: Text(article['description']),
+                  leading:
+                      article['image'] != null && article['image'].isNotEmpty
+                          ? Image.network(article['image'],
+                              fit: BoxFit.cover, width: 100)
+                          : Container(
+                              width: 100,
+                              color: Colors.black,
+                              child: Icon(Icons.image, color: Colors.white)),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

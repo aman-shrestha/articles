@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../db_helper.dart';
+
 class HomeDetailView extends StatelessWidget {
   final String? image;
   final String title;
@@ -15,6 +17,17 @@ class HomeDetailView extends StatelessWidget {
     required this.autor,
     required this.publishedAt,
   }) : super(key: key);
+  void _saveFavorite(BuildContext context) async {
+    DBHelper dbHelper = DBHelper();
+    await dbHelper.insertFavorite({
+      'title': title,
+      'description': description,
+      'image': image,
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Article saved to favorites')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +122,11 @@ class HomeDetailView extends StatelessWidget {
                   description,
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 25),
+                ElevatedButton(
+                  onPressed: () => _saveFavorite(context),
+                  child: Text('Save to Favorites'),
+                ),
               ],
             ),
           ),

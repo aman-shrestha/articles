@@ -1,3 +1,4 @@
+import 'package:articles/app/modules/favorite/views/favorite_view.dart';
 import 'package:articles/app/modules/home/multi_data_model.dart';
 import 'package:articles/app/modules/home/views/home.dart';
 import 'package:articles/app/modules/home/views/home_detail_view.dart';
@@ -46,6 +47,17 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("ARTICLES"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FavoriteView()),
+              );
+            },
+          ),
+        ],
       ),
       body: isReady
           ? Center(
