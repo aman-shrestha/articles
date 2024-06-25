@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:articles/app/data/api_client.dart';
-import 'package:articles/app/modules/home/post_model.dart';
+
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {

@@ -1,12 +1,12 @@
 import 'package:articles/app/modules/home/multi_data_model.dart';
 import 'package:articles/app/modules/home/views/home.dart';
+import 'package:articles/app/modules/home/views/home_detail_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../../../data/api_client.dart';
 import '../controllers/home_controller.dart';
-import '../post_model.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({super.key});
@@ -66,55 +66,80 @@ class _HomeViewState extends State<HomeView> {
                         child: ListView.builder(
                           itemCount: multiData!.articles?.length,
                           itemBuilder: (context, index) {
-                            return Card(
-                              child: Column(
-                                children: [
-                                  if (multiData!.articles![index].urlToImage !=
-                                          null &&
-                                      multiData!.articles![index].urlToImage!
-                                          .isNotEmpty)
-                                    Image.network(
-                                      multiData!.articles![index].urlToImage!,
-                                      fit: BoxFit.cover,
-                                      height: 200,
-                                      width: double.infinity,
-                                    )
-                                  else
-                                    Container(
-                                      height: 200,
-                                      color: Colors.black,
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(
-                                              Icons.image,
-                                              color: Colors.white,
-                                            ),
-                                            SizedBox(width: 10),
-                                            Text(
-                                              "NO IMAGE",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ListTile(
-                                    title: Text(
-                                      multiData!.articles![index].title ??
-                                          'No title',
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    subtitle: Text(
-                                      multiData!.articles![index].description ??
-                                          'No description',
-                                      overflow: TextOverflow.ellipsis,
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomeDetailView(
+                                      image: multiData!
+                                          .articles![index].urlToImage!,
+                                      title: multiData!.articles![index].title
+                                          .toString(),
+                                      description: multiData!
+                                          .articles![index].description
+                                          .toString(),
+                                      autor: multiData!.articles![index].author
+                                          .toString(),
+                                      publishedAt: multiData!
+                                          .articles![index].publishedAt
+                                          .toString(),
                                     ),
                                   ),
-                                ],
+                                );
+                              },
+                              child: Card(
+                                child: Column(
+                                  children: [
+                                    if (multiData!
+                                                .articles![index].urlToImage !=
+                                            null &&
+                                        multiData!.articles![index].urlToImage!
+                                            .isNotEmpty)
+                                      Image.network(
+                                        multiData!.articles![index].urlToImage!,
+                                        fit: BoxFit.cover,
+                                        height: 200,
+                                        width: double.infinity,
+                                      )
+                                    else
+                                      Container(
+                                        height: 200,
+                                        color: Colors.black,
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.image,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(width: 10),
+                                              Text(
+                                                "NO IMAGE",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ListTile(
+                                      title: Text(
+                                        multiData!.articles![index].title ??
+                                            'No title',
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      subtitle: Text(
+                                        multiData!
+                                                .articles![index].description ??
+                                            'No description',
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
