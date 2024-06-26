@@ -29,8 +29,14 @@ class FavoriteView extends GetView<FavoriteController> {
               return Card(
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 child: ListTile(
-                  title: Text(article['title']),
-                  subtitle: Text(article['description']),
+                  title: Text(
+                    article['title'],
+                    style: TextStyle(overflow: TextOverflow.ellipsis),
+                  ),
+                  subtitle: Text(
+                    article['description'],
+                    style: TextStyle(overflow: TextOverflow.ellipsis),
+                  ),
                   leading:
                       article['image'] != null && article['image'].isNotEmpty
                           ? Image.network(article['image'],
