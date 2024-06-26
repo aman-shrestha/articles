@@ -85,7 +85,8 @@ class _HomeViewState extends State<HomeView> {
                                   MaterialPageRoute(
                                     builder: (context) => HomeDetailView(
                                       image: multiData!
-                                          .articles![index].urlToImage!,
+                                              .articles?[index].urlToImage ??
+                                          'https://st4.depositphotos.com/14953852/24787/v/1600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg',
                                       title: multiData!.articles![index].title
                                           .toString(),
                                       description: multiData!
@@ -115,28 +116,30 @@ class _HomeViewState extends State<HomeView> {
                                         width: double.infinity,
                                       )
                                     else
-                                      Container(
-                                        height: 200,
-                                        color: Colors.black,
-                                        child: Center(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.image,
-                                                color: Colors.white,
-                                              ),
-                                              SizedBox(width: 10),
-                                              Text(
-                                                "NO IMAGE",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                      Image.network(
+                                          'https://st4.depositphotos.com/14953852/24787/v/1600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg'),
+                                    //   Container(
+                                    //     height: 200,
+                                    //     color: Colors.black,
+                                    //     child: Center(
+                                    //       child: Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.center,
+                                    //         children: [
+                                    //           Icon(
+                                    //             Icons.image,
+                                    //             color: Colors.white,
+                                    //           ),
+                                    //           SizedBox(width: 10),
+                                    //           Text(
+                                    //             "NO IMAGE",
+                                    //             style: TextStyle(
+                                    //                 color: Colors.white),
+                                    //           )
+                                    //         ],
+                                    //       ),
+                                    //     ),
+                                    //   ),
                                     ListTile(
                                       title: Text(
                                         multiData!.articles![index].title ??
