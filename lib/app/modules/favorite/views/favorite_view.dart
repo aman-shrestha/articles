@@ -35,7 +35,9 @@ class FavoriteView extends GetView<FavoriteController> {
                   ),
                   subtitle: Text(
                     article['description'],
-                    style: TextStyle(overflow: TextOverflow.ellipsis),
+                    style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   leading:
                       article['image'] != null && article['image'].isNotEmpty
